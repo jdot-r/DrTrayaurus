@@ -1,5 +1,6 @@
 <?php
 namespace drtrayaurus;
+
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
@@ -14,14 +15,15 @@ use pocketmine\network\protocol\RemoveEntityPacket;
 use pocketmine\network\protocol\RemovePlayerPacket;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
+
 class DrTrayaurus extends PluginBase implements Listener, CommandExecutor{
      /*@var DisguiseSession[]*/
     public $e;
      /*@var MobStore */
     private $mobStore;
     public function onEnable(){
-
-	$this->getServer()->getPluginManager()->registerEvents($this, $this);
+	    $this->e = [];
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->mobStore = new MobStore($this);
     }
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
@@ -140,7 +142,7 @@ class DrTrayaurus extends PluginBase implements Listener, CommandExecutor{
     }
     public function onDisable(){
         $this->getLogger()->info("Closing disguise sessions.");
-        foreach($this->$e->$eid->$s){
+        foreach($this->e as $eid => $s){
             $this->destroyDisguise($eid);
         }
     }
